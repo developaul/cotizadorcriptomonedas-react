@@ -27,8 +27,6 @@ const useCriptomoneda = ( label, stateInitial, opciones ) => {
     // State de nuestr Hook
     const [ state, setState ] = useState( stateInitial );
 
-
-
     const SelectCripto = () => (
         <>
             <Label>{ label }</Label>
@@ -38,16 +36,16 @@ const useCriptomoneda = ( label, stateInitial, opciones ) => {
                 value={ state }
             >
                 <option value="" >- Seleccione -</option>
-                {/* {
-                    opciones.map( ({ codigo, nombre }) => (
+                {
+                    opciones.map( ({ CoinInfo:{ Id, FullName ,Name } }) => (
                         <option
-                            key={ codigo }
-                            value={ codigo } 
+                            key={ Id }
+                            value={ Name } 
                         >
-                            { nombre }
+                            { FullName }
                         </option>
                     ))
-                } */}
+                }
             </Select>
         </>
     );

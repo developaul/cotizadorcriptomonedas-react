@@ -27,8 +27,6 @@ const useMoneda = ( label, stateInitial, opciones ) => {
     // State de nuestr Hook
     const [ state, setState ] = useState( stateInitial );
 
-
-
     const Seleccionar = () => (
         <>
             <Label>{ label }</Label>
