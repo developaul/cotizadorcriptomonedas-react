@@ -1,4 +1,5 @@
 import React, { useState ,useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import styled from '@emotion/styled';
 import Axios from 'axios';
@@ -25,7 +26,7 @@ const Boton = styled.input`
     }
 `;
 
-const Formulario = () => {
+const Formulario = ({ setMoneda, setCriptomoneda }) => {
 
     // State del listado de criptomonedas
     const [ listacripto, setListCripto ] = useState( [] );
@@ -36,12 +37,12 @@ const Formulario = () => {
         { codigo: 'MXN', nombre: 'Peso Mexicano' },
         { codigo: 'EUR', nombre: 'Euro' },
         { codigo: 'GBP', nombre: 'Libra Esterlina' },
-        { codigo: 'PE', nombre: 'Soles Peruano' }
+        { codigo: 'PEN', nombre: 'Soles Peruano' }
     ]
 
-    const [ moneda, SelectMonedas, setMoneda ] = useMoneda( 'Elige tu Moneda', '', MONEDAS );
+    const [ moneda, SelectMonedas ] = useMoneda( 'Elige tu Moneda', '', MONEDAS );
 
-    const [ criptomoneda, SelectCripto, setCripto ] = useCriptomoneda( 'Elige tu Criptomoneda', '', listacripto );
+    const [ criptomoneda, SelectCripto ] = useCriptomoneda( 'Elige tu Criptomoneda', '', listacripto );
 
     // Ejecutar llamado a la api
     useEffect( () => {
@@ -70,8 +71,9 @@ const Formulario = () => {
 
         setError( false );
 
-        // Realizar Cotización
-
+        // Guardar datos para realizar petición
+        setMoneda( moneda );
+        setCriptomoneda( criptomoneda );
     }
 
     return (
@@ -92,5 +94,10 @@ const Formulario = () => {
         </form>
     );
 };
+
+Formulario.propTypes = {
+    setMoneda: PropTypes.func.isRequired,
+    setCriptomoneda: PropTypes.func.isRequired
+}
 
 export default Formulario;
